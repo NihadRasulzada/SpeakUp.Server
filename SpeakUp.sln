@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{ED266F74-0723-459E-BF25-A3B6256C9C70}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{B53DA362-E5C0-4B54-862E-A7CA10BD7C47}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApi", "WebApi", "{8C745289-3B34-4E9E-A54C-01A14249D06D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeakUp.Domain", "Core\SpeakUp.Domain\SpeakUp.Domain.csproj", "{7DB64405-644C-4442-BA60-3AC8E5CA8BEE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeakUp.Application", "Core\SpeakUp.Application\SpeakUp.Application.csproj", "{C67BB1C7-DA78-4DC4-85AF-E917AF2412B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeakUp.Persistence", "Infrastructure\SpeakUp.Persistence\SpeakUp.Persistence.csproj", "{40F0E94E-1B34-482D-AEF1-11779E0CB524}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeakUp.Api", "WebApi\SpeakUp.Api\SpeakUp.Api.csproj", "{5D1DAB53-9AF8-4BEC-AD01-AA5AA602F653}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7DB64405-644C-4442-BA60-3AC8E5CA8BEE} = {ED266F74-0723-459E-BF25-A3B6256C9C70}
+		{C67BB1C7-DA78-4DC4-85AF-E917AF2412B7} = {ED266F74-0723-459E-BF25-A3B6256C9C70}
+		{40F0E94E-1B34-482D-AEF1-11779E0CB524} = {B53DA362-E5C0-4B54-862E-A7CA10BD7C47}
+		{5D1DAB53-9AF8-4BEC-AD01-AA5AA602F653} = {8C745289-3B34-4E9E-A54C-01A14249D06D}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7DB64405-644C-4442-BA60-3AC8E5CA8BEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DB64405-644C-4442-BA60-3AC8E5CA8BEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DB64405-644C-4442-BA60-3AC8E5CA8BEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DB64405-644C-4442-BA60-3AC8E5CA8BEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C67BB1C7-DA78-4DC4-85AF-E917AF2412B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C67BB1C7-DA78-4DC4-85AF-E917AF2412B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C67BB1C7-DA78-4DC4-85AF-E917AF2412B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C67BB1C7-DA78-4DC4-85AF-E917AF2412B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40F0E94E-1B34-482D-AEF1-11779E0CB524}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40F0E94E-1B34-482D-AEF1-11779E0CB524}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40F0E94E-1B34-482D-AEF1-11779E0CB524}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40F0E94E-1B34-482D-AEF1-11779E0CB524}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D1DAB53-9AF8-4BEC-AD01-AA5AA602F653}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D1DAB53-9AF8-4BEC-AD01-AA5AA602F653}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D1DAB53-9AF8-4BEC-AD01-AA5AA602F653}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D1DAB53-9AF8-4BEC-AD01-AA5AA602F653}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
