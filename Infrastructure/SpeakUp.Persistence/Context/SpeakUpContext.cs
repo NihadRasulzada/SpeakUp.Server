@@ -1,5 +1,6 @@
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using SpeakUp.Domain.Models;
 
 namespace SpeakUp.Persistence.Context;
