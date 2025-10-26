@@ -1,4 +1,4 @@
-using SpeakUp.Common.ViewModels;
+using SpeakUp.Common.Models;
 
 namespace SpeakUp.Domain.Models;
 
