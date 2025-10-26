@@ -6,4 +6,10 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Reference Include="SpeakUp.Common">
+        <HintPath>..\..\..\..\Common\SpeakUp\SpeakUp.Common\bin\Debug\net9.0\SpeakUp.Common.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
 </Project>
