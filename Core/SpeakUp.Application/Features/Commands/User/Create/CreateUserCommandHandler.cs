@@ -39,7 +39,7 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Guid>
                 NewEmailAddress = dbUser.EmailAddress
             };
 
-            QueueFactory.SendMessageToExchange(exchangeName: SpeakUpConstants.UserExchangeName,
+            await QueueFactory.SendMessageToExchange(exchangeName: SpeakUpConstants.UserExchangeName,
                 exchangeType: SpeakUpConstants.DefaultExchangeType,
                 queueName: SpeakUpConstants.UserEmailChangedQueueName,
                 obj: @event);
