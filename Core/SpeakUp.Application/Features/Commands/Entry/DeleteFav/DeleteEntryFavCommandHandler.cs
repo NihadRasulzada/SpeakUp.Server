@@ -1,4 +1,3 @@
-using MediatR;
 using SpeakUp.Common;
 using SpeakUp.Common.Events.Entry;
 using SpeakUp.Common.Infratructure;
@@ -9,11 +8,11 @@ public class DeleteEntryFavCommandHandler : IRequestHandler<DeleteEntryFavComman
 {
     public async Task<bool> Handle(DeleteEntryFavCommand request, CancellationToken cancellationToken)
     {
-        QueueFactory.SendMessageToExchange(exchangeName: SpeakUpConstants.FavExchangeName,
-            exchangeType: SpeakUpConstants.DefaultExchangeType,
-            queueName: SpeakUpConstants.DeleteEntryFavQueueName,
-            obj: new DeleteEntryFavEvent()
-            { 
+        QueueFactory.SendMessageToExchange(SpeakUpConstants.FavExchangeName,
+            SpeakUpConstants.DefaultExchangeType,
+            SpeakUpConstants.DeleteEntryFavQueueName,
+            new DeleteEntryFavEvent
+            {
                 EntryId = request.EntryId,
                 CreatedBy = request.UserId
             });

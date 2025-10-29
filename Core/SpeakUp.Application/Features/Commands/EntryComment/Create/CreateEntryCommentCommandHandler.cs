@@ -1,5 +1,3 @@
-using AutoMapper;
-using MediatR;
 using SpeakUp.Application.Interfaces.Repositories;
 using SpeakUp.Common.Models.RequestModels;
 

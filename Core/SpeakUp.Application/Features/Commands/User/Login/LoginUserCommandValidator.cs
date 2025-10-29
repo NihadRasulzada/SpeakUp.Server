@@ -9,7 +9,7 @@ public class LoginUserCommandValidator : AbstractValidator<LoginUserCommand>
     {
         RuleFor(i => i.EmailAddress)
             .NotNull()
-            .EmailAddress(FluentValidation.Validators.EmailValidationMode.AspNetCoreCompatible)
+            .EmailAddress()
             .WithMessage("{PropertyName} not a valid email address");
 
         RuleFor(i => i.Password)
