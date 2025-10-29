@@ -1,8 +1,6 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using AutoMapper;
-using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using SpeakUp.Application.Interfaces.Repositories;
@@ -15,9 +13,9 @@ namespace SpeakUp.Application.Features.Commands.User.Login;
 
 public class LoginUserCommandHandler : IRequestHandler<LoginUserCommand, LoginUserViewModel>
 {
-    private readonly IUserRepository userRepository;
-    private readonly IMapper mapper;
     private readonly IConfiguration configuration;
+    private readonly IMapper mapper;
+    private readonly IUserRepository userRepository;
 
     public LoginUserCommandHandler(IUserRepository userRepository, IMapper mapper, IConfiguration configuration)
     {
@@ -42,7 +40,7 @@ public class LoginUserCommandHandler : IRequestHandler<LoginUserCommand, LoginUs
 
         var result = mapper.Map<LoginUserViewModel>(dbUser);
 
-        var claims = new Claim[] 
+        var claims = new[]
         {
             new Claim(ClaimTypes.NameIdentifier, dbUser.Id.ToString()),
             new Claim(ClaimTypes.Email, dbUser.EmailAddress),
@@ -63,9 +61,9 @@ public class LoginUserCommandHandler : IRequestHandler<LoginUserCommand, LoginUs
         var expiry = DateTime.Now.AddDays(10);
 
         var token = new JwtSecurityToken(claims: claims,
-                                         expires: expiry,
-                                         signingCredentials: creds,
-                                         notBefore: DateTime.Now);
+            expires: expiry,
+            signingCredentials: creds,
+            notBefore: DateTime.Now);
 
         return new JwtSecurityTokenHandler().WriteToken(token);
     }

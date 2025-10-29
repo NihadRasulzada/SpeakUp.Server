@@ -1,5 +1,3 @@
-using AutoMapper;
-using MediatR;
 using SpeakUp.Application.Interfaces.Repositories;
 using SpeakUp.Common;
 using SpeakUp.Common.Events.User;
@@ -33,16 +31,16 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Guid>
 
         if (rows > 0)
         {
-            var @event = new UserEmailChangedEvent()
+            var @event = new UserEmailChangedEvent
             {
                 OldEmailAddress = null,
                 NewEmailAddress = dbUser.EmailAddress
             };
 
-            await QueueFactory.SendMessageToExchange(exchangeName: SpeakUpConstants.UserExchangeName,
-                exchangeType: SpeakUpConstants.DefaultExchangeType,
-                queueName: SpeakUpConstants.UserEmailChangedQueueName,
-                obj: @event);
+            await QueueFactory.SendMessageToExchange(SpeakUpConstants.UserExchangeName,
+                SpeakUpConstants.DefaultExchangeType,
+                SpeakUpConstants.UserEmailChangedQueueName,
+                @event);
         }
 
         return dbUser.Id;

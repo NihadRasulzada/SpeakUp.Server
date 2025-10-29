@@ -1,4 +1,3 @@
-using MediatR;
 using SpeakUp.Application.Interfaces.Repositories;
 using SpeakUp.Common.Events.User;
 using SpeakUp.Common.Infratructure;
@@ -26,7 +25,7 @@ public class ChangeUserPasswordCommandHandler : IRequestHandler<ChangeUserPasswo
             throw new DatabaseValidationException("User not found!");
 
         var encPass = PasswordEncryptor.Encrpt(request.OldPassword);
-        if(dbUser.Password != encPass)
+        if (dbUser.Password != encPass)
             throw new DatabaseValidationException("Old password wrong!");
 
         dbUser.Password = PasswordEncryptor.Encrpt(request.NewPassword);

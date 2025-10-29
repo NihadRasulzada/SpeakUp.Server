@@ -1,4 +1,3 @@
-using AutoMapper;
 using SpeakUp.Common.Models.Queries;
 using SpeakUp.Common.Models.RequestModels;
 using SpeakUp.Domain.Models;

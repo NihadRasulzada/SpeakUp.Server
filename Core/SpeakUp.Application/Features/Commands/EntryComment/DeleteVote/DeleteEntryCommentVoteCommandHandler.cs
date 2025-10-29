@@ -1,4 +1,3 @@
-using MediatR;
 using SpeakUp.Common;
 using SpeakUp.Common.Events.EntryComment;
 using SpeakUp.Common.Infratructure;
@@ -9,10 +8,10 @@ public class DeleteEntryCommentVoteCommandHandler : IRequestHandler<DeleteEntryC
 {
     public async Task<bool> Handle(DeleteEntryCommentVoteCommand request, CancellationToken cancellationToken)
     {
-        QueueFactory.SendMessageToExchange(exchangeName: SpeakUpConstants.FavExchangeName,
-            exchangeType: SpeakUpConstants.DefaultExchangeType,
-            queueName: SpeakUpConstants.DeleteEntryCommentVoteQueueName,
-            obj: new DeleteEntryCommentVoteEvent()
+        QueueFactory.SendMessageToExchange(SpeakUpConstants.FavExchangeName,
+            SpeakUpConstants.DefaultExchangeType,
+            SpeakUpConstants.DeleteEntryCommentVoteQueueName,
+            new DeleteEntryCommentVoteEvent
             {
                 EntryCommentId = request.EntryCommentId,
                 CreatedBy = request.UserId

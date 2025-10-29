@@ -1,7 +1,5 @@
 using System.Reflection;
-using AutoMapper;
 using FluentValidation;
-using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using SpeakUp.Application.Mapping;
 
@@ -13,11 +11,8 @@ public static class Registration
     {
         var assm = Assembly.GetExecutingAssembly();
 
-        services.AddMediatR(cfg =>
-        {
-            cfg.RegisterServicesFromAssembly(assm);
-        });
-        services.AddAutoMapper(typeof(MappingProfile).Assembly);   
+        services.AddMediatR(cfg => { cfg.RegisterServicesFromAssembly(assm); });
+        services.AddAutoMapper(typeof(MappingProfile).Assembly);
         services.AddValidatorsFromAssembly(assm);
 
         return services;

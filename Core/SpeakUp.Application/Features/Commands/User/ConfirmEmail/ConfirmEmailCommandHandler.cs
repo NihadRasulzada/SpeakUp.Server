@@ -1,4 +1,3 @@
-using MediatR;
 using SpeakUp.Application.Interfaces.Repositories;
 using SpeakUp.Common.Infratructure.Exceptions;
 
@@ -6,10 +5,11 @@ namespace SpeakUp.Application.Features.Commands.User.ConfirmEmail;
 
 public class ConfirmEmailCommandHandler : IRequestHandler<ConfirmEmailCommand, bool>
 {
-    private readonly IUserRepository userRepository;
     private readonly IEmailConfirmationRepository emailConfirmationRepository;
+    private readonly IUserRepository userRepository;
 
-    public ConfirmEmailCommandHandler(IUserRepository userRepository, IEmailConfirmationRepository emailConfirmationRepository)
+    public ConfirmEmailCommandHandler(IUserRepository userRepository,
+        IEmailConfirmationRepository emailConfirmationRepository)
     {
         this.userRepository = userRepository;
         this.emailConfirmationRepository = emailConfirmationRepository;
@@ -24,7 +24,7 @@ public class ConfirmEmailCommandHandler : IRequestHandler<ConfirmEmailCommand, b
 
         var dbUser = await userRepository.GetSingleAsync(i => i.EmailAddress == confirmation.NewEmailAddress);
 
-        if(dbUser is null)
+        if (dbUser is null)
             throw new DatabaseValidationException("User not found with this email!");
 
         if (dbUser.EmailConfirmed)

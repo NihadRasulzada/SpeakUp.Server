@@ -1,4 +1,3 @@
-using MediatR;
 using SpeakUp.Common;
 using SpeakUp.Common.Events.Entry;
 using SpeakUp.Common.Infratructure;
@@ -10,10 +9,10 @@ public class CreateEntryVoteCommandHandler : IRequestHandler<CreateEntryVoteComm
 {
     public async Task<bool> Handle(CreateEntryVoteCommand request, CancellationToken cancellationToken)
     {
-        QueueFactory.SendMessageToExchange(exchangeName: SpeakUpConstants.VoteExchangeName,
-            exchangeType: SpeakUpConstants.DefaultExchangeType,
-            queueName: SpeakUpConstants.CreateEntryVoteQueueName,
-            obj: new CreateEntryVoteEvent()
+        QueueFactory.SendMessageToExchange(SpeakUpConstants.VoteExchangeName,
+            SpeakUpConstants.DefaultExchangeType,
+            SpeakUpConstants.CreateEntryVoteQueueName,
+            new CreateEntryVoteEvent
             {
                 EntryId = request.EntryId,
                 CreatedBy = request.CreatedBy,
