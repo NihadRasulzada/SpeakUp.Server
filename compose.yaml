@@ -1,0 +1,73 @@
+﻿# version: "3.9"
+
+# services:
+#   speakup.api:
+#     container_name: speakup.api
+#     image: speakup.api
+#     build:
+#       context: ../../  # solution kökü
+#       dockerfile: API/SpeakUp.Server/WebApi/SpeakUp.Api/Dockerfile
+#     restart: unless-stopped
+#     ports:
+#       - "5000:8080"
+#       - "5001:8081"
+#     environment:
+#       - ASPNETCORE_ENVIRONMENT=Development
+#       - ASPNETCORE_URLS=http://+:8080
+#     # Əgər API başqa servislərlə (məsələn, DB) əlaqə qurursa, bura əlavə edə bilərsən:
+#     # depends_on:
+#     #   - speakup.db
+#     #   - redis
+#     #   - rabbitmq
+#     volumes:
+#       # Kod dəyişiklikləri üçün (local dev zamanı) — lazım olmasa silə bilərsən
+#       - ./WebApi/SpeakUp.Api:/app
+#     networks:
+#       - speakup-network
+
+#   # Nümunə: SQL Server əlavə etmək istəyirsənsə
+#   # speakup.db:
+#   #   image: mcr.microsoft.com/mssql/server:2022-latest
+#   #   container_name: speakup.db
+#   #   environment:
+#   #     - ACCEPT_EULA=Y
+#   #     - SA_PASSWORD=Your_password123
+#   #   ports:
+#   #     - "1433:1433"
+#   #   volumes:
+#   #     - speakup_data:/var/opt/mssql
+#   #   networks:
+#   #     - speakup-network
+
+# networks:
+#   speakup-network:
+#     driver: bridge
+
+# # volumes:
+# #   speakup_data:
+# #     driver: local
+
+
+version: "3.9"
+
+services:
+  speakup.api:
+    container_name: speakup.api
+    build:
+      context: ../../  # Solution kökü
+      dockerfile: API/SpeakUp.Server/WebApi/SpeakUp.Api/Dockerfile
+    restart: unless-stopped
+    ports:
+      - "5000:8080"
+      - "5001:8081"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+    volumes:
+      - ./WebApi/SpeakUp.Api:/app  # Local dev üçün, istəyə görə silinə bilər
+    networks:
+      - speakup-network
+
+networks:
+  speakup-network:
+    driver: bridge

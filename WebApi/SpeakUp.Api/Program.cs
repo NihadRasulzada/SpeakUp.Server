@@ -12,7 +12,7 @@ builder.Services
     .AddJsonOptions(opt => { opt.JsonSerializerOptions.PropertyNamingPolicy = null; })
     .AddFluentValidation()
     .ConfigureApiBehaviorOptions(o => o.SuppressModelStateInvalidFilter = true);
-builder.Services.AddOpenApi();
+// builder.Services.AddOpenApi();
 
 builder.Services.AddApplicationRegistration();
 builder.Services.AddInfrastructureRegistration(builder.Configuration);
@@ -29,9 +29,9 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    // app.MapOpenApi();
 }
-    app.MapScalarApiReference();
+app.MapScalarApiReference();
 
 
 app.UseHttpsRedirection();
