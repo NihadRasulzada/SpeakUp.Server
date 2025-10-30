@@ -7,33 +7,41 @@ using SpeakUp.Persistence.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// --- Add Services ---
 builder.Services
     .AddControllers(opt => opt.Filters.Add<ValidateModelStateFilter>())
-    .AddJsonOptions(opt => { opt.JsonSerializerOptions.PropertyNamingPolicy = null; })
+    .AddJsonOptions(opt => opt.JsonSerializerOptions.PropertyNamingPolicy = null)
     .AddFluentValidation()
     .ConfigureApiBehaviorOptions(o => o.SuppressModelStateInvalidFilter = true);
-// builder.Services.AddOpenApi();
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 builder.Services.AddApplicationRegistration();
 builder.Services.AddInfrastructureRegistration(builder.Configuration);
 builder.Services.ConfigureAuth(builder.Configuration);
 
-builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+builder.Services.AddCors(o => o.AddPolicy("MyPolicy", policyBuilder =>
 {
-    builder.AllowAnyOrigin()
+    policyBuilder.AllowAnyOrigin()
         .AllowAnyMethod()
         .AllowAnyHeader();
 }));
 
 var app = builder.Build();
 
+// --- Swagger (yalnız development üçün) ---
 if (app.Environment.IsDevelopment())
 {
-    // app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "SpeakUp API V1");
+        //c.RoutePrefix = string.Empty; // Swagger root URL
+    });
 }
-app.MapScalarApiReference();
 
-
+// --- Middlewares ---
 app.UseHttpsRedirection();
 
 app.ConfigureExceptionHandling(app.Environment.IsDevelopment());
@@ -43,6 +51,7 @@ app.UseAuthorization();
 
 app.UseCors("MyPolicy");
 
+// --- Map Controllers ---
 app.MapControllers();
 
 app.Run();

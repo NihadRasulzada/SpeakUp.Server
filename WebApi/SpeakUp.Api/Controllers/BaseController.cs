@@ -7,7 +7,7 @@ namespace SpeakUp.Api.Controllers;
 [ApiController]
 public class BaseController : ControllerBase
 {
-    public Guid? UserId
+    protected Guid? UserId
     {
         get
         {

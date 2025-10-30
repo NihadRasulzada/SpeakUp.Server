@@ -11,15 +11,8 @@ using SpeakUp.Common.Models.RequestModels;
 
 namespace SpeakUp.Api.Controllers;
 
-public class EntryController : BaseController
+public class EntryController(IMediator mediator) : BaseController
 {
-    private readonly IMediator mediator;
-
-    public EntryController(IMediator mediator)
-    {
-        this.mediator = mediator;
-    }
-
     [HttpGet]
     public async Task<IActionResult> GetEntries([FromQuery] GetEntriesQuery query)
     {
@@ -30,7 +23,7 @@ public class EntryController : BaseController
 
 
 
-    [HttpGet("{id}")]
+    [HttpGet("{id:guid}")]
     public async Task<IActionResult> GetById(Guid id)
     {
         var result = await mediator.Send(new GetEntryDetailQuery(id, UserId));
@@ -54,7 +47,8 @@ public class EntryController : BaseController
     public async Task<IActionResult> GetUserEntries(string userName, Guid userId, int page, int pageSize)
     {
         if (userId == Guid.Empty && string.IsNullOrEmpty(userName))
-            userId = UserId.Value;
+            if (UserId != null)
+                userId = UserId.Value;
 
         var result = await mediator.Send(new GetUserEntriesQuery(userId, userName, page, pageSize));
 
@@ -76,8 +70,7 @@ public class EntryController : BaseController
     [Authorize]
     public async Task<IActionResult> CreateEntry([FromBody] CreateEntryCommand command)
     {
-        if (!command.CreatedById.HasValue)
-            command.CreatedById = UserId;
+        command.CreatedById ??= UserId;
 
         var result = await mediator.Send(command);
 
@@ -89,8 +82,7 @@ public class EntryController : BaseController
     [Authorize]
     public async Task<IActionResult> CreateEntryComment([FromBody] CreateEntryCommentCommand command)
     {
-        if (!command.CreatedById.HasValue)
-            command.CreatedById = UserId;
+        command.CreatedById ??= UserId;
 
         var result = await mediator.Send(command);
 
