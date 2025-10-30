@@ -9,16 +9,8 @@ namespace SpeakUp.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class FavoriteController : BaseController
+public class FavoriteController(IMediator mediator) : BaseController
 {
-
-    private readonly IMediator mediator;
-
-    public FavoriteController(IMediator mediator)
-    {
-        this.mediator = mediator;
-    }
-
     [HttpPost]
     [Route("entry/{entryId}")]
     public async Task<IActionResult> CreateEntryFav(Guid entryId)
@@ -32,7 +24,7 @@ public class FavoriteController : BaseController
     [Route("entrycomment/{entrycommentId}")]
     public async Task<IActionResult> CreateEntryCommentFav(Guid entrycommentId)
     {
-        var result = await mediator.Send(new CreateEntryCommentFavCommand(entrycommentId, UserId.Value));
+        var result = UserId != null && await mediator.Send(new CreateEntryCommentFavCommand(entrycommentId, UserId.Value));
 
         return Ok(result);
     }
@@ -42,7 +34,7 @@ public class FavoriteController : BaseController
     [Route("deleteentryfav/{entryId}")]
     public async Task<IActionResult> DeleteEntryFav(Guid entryId)
     {
-        var result = await mediator.Send(new DeleteEntryFavCommand(entryId, UserId.Value));
+        var result = UserId != null && await mediator.Send(new DeleteEntryFavCommand(entryId, UserId.Value));
 
         return Ok(result);
     }
@@ -51,7 +43,7 @@ public class FavoriteController : BaseController
     [Route("deleteentrycommentfav/{entrycommentId}")]
     public async Task<IActionResult> DeleteEntryCommentFav(Guid entrycommentId)
     {
-        var result = await mediator.Send(new DeleteEntryCommentFavCommand(entrycommentId, UserId.Value));
+        var result = UserId != null && await mediator.Send(new DeleteEntryCommentFavCommand(entrycommentId, UserId.Value));
 
         return Ok(result);
     }

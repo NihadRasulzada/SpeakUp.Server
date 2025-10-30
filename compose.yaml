@@ -1,0 +1,19 @@
+﻿version: "3.9"
+
+services:
+  speakup.api:
+    container_name: speakup.api
+    image: speakup.api
+    build:
+      context: .
+      dockerfile: WebApi/SpeakUp.Api/Dockerfile
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+    restart: always
+    networks:
+      - mssql_default
+
+networks:
+  mssql_default:
+    external: true
