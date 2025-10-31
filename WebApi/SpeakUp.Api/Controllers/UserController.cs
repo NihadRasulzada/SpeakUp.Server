@@ -47,7 +47,6 @@ public class UserController : BaseController
     }
 
     [HttpPost]
-    [Authorize]
     public async Task<IActionResult> Create([FromBody] CreateUserCommand command)
     {
         var guid = await mediator.Send(command);
